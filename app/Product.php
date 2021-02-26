@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $guarded = [];
+
     public function order()
     {
-        return $this->belongsTo('App/Order');
+        return $this->hasOne('App\Order');
     }
 }
