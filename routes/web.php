@@ -23,6 +23,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
     Route::post('/produk/', 'AdminController@input_product')->name('admin.input_product');
     Route::get('/produk/edit/{id}', 'AdminController@edit_product')->name('admin.edit_product');
     Route::put('/produk/{id}', 'AdminController@update_product')->name('admin.update_product');
+    Route::delete('/produk/{id}', 'AdminController@delete_product')->name('admin.delete_product');
+    Route::get('/pesanan/', 'AdminController@order')->name('admin.order');
+    Route::get('/pesanan/{id}', 'AdminController@detail_order')->name('admin.detail_order');
+    Route::get('/pesanan/{id}/edit', 'AdminController@edit_order')->name('admin.edit_order');
+    Route::put('/pesanan/{id}', 'AdminController@update_order')->name('admin.update_order');
+    Route::delete('/pesanan/{id}', 'AdminController@delete_order')->name('admin.delete_order');
+    Route::get('/pelanggan/', 'AdminController@pelanggan')->name('admin.pelanggan');
+    Route::get('/pelanggan/{id}', 'AdminController@detail_pelanggan')->name('admin.detail_pelanggan');
+    Route::get('/pelanggan/{id}/edit', 'AdminController@edit_pelanggan')->name('admin.edit_pelanggan');
+    Route::delete('/pelanggan/{id}', 'AdminController@delete_pelanggan')->name('admin.delete_pelanggan');
 });
 
 Route::group(['prefix' => 'pelanggan', 'middleware' => 'pelanggan'], function(){

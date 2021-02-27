@@ -20,7 +20,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('guest.index') }}" style="color: white;">Beranda
+                            <a class="nav-link" href="{{ route('admin.index') }}" style="color: white;">Beranda
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
@@ -28,10 +28,10 @@
                             <a class="nav-link" href="{{ route('admin.product') }}" style="color: white;">Produk</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#masjid" style="color: white;">Pesanan</a>
+                            <a class="nav-link" href="{{ route('admin.order') }}" style="color: white;">Pesanan</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#masjid" style="color: white;">Pelanggan</a>
+                            <a class="nav-link" href="{{ route('admin.pelanggan') }}" style="color: white;">Pelanggan</a>
                         </li>
                         @if (Route::has('login'))
                             @auth

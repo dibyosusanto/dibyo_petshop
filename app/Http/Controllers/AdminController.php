@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Product;
+use App\Order;
+use App\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -82,5 +84,60 @@ class AdminController extends Controller
             
             return redirect(route('admin.product'))->with('status', 'Data berhasil diubah!');
         }    
+    }
+    public function delete_product($id)
+    {
+        Product::where('id', $id)->delete();
+        return redirect(route('admin.product'))->with('status', 'Data berhasil dihapus!');
+    }
+
+    public function order()
+    {
+        $orders = Order::all();
+        return view('admin.order', compact('orders'));
+    }
+
+    public function detail_order($id)
+    {
+        $order = Order::where('id', $id)->first();
+        return view('admin.detail_order', compact('order'));
+    }
+
+    public function edit_order($id)
+    {
+        $order = Order::where('id', $id)->first();
+        return view('admin.edit_order', compact('order'));
+    }
+
+    public function update_order(Request $request, $id)
+    {
+        Order::where('id', $id)->update([
+            'status' => $request->status,
+        ]);
+        return redirect(route('admin.order'))->with('status', 'Data berhasil diperbarui');
+    }
+
+    public function delete_order($id)
+    {
+        Order::where('id', $id)->delete();
+        return redirect(route('admin.order'))->with('status', 'Data berhasil dihapus');
+    }
+
+    public function pelanggan()
+    {
+        $customers = User::where('role', '2')->get();
+        return view('admin.pelanggan', compact('customers'));
+    }
+
+    public function detail_pelanggan($id)
+    {
+        $customer = User::where('id', $id)->first();
+        return view('admin.detail_pelanggan', compact('customer'));
+    }
+
+    public function delete_pelanggan($id)
+    {
+        User::where('id', $id)->delete();
+        return redirect(route('admin.pelanggan'));
     }
 }

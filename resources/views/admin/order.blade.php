@@ -5,12 +5,7 @@
 
 @section('content')
     <div class="container mt-5 pt-3"></div>
-    <div class="my-4">
-        <div class="my-4">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#input_product"><i class="fa fa-plus-circle" aria-hidden="true"></i>
-                Tambah Produk Baru 
-            </button>
-        </div>
+    <div class="my-4">        
         @if(session('status'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -25,25 +20,34 @@
         <table id="infaq" class="table table-hover table-striped">
             <thead class="thead-dark">
                     <th>#</th>
-                    <th>Nama Produk</th>
-                    <th>Deskripsi</th>
-                    <th>Harga</th>
-                    <th>Gambar</th>
+                    <th>Tanggal Pemesanan</th>
+                    <th>Produk</th>
+                    <th>Qty</th>
+                    <th>Pelanggan</th>
+                    <th>Status</th>
                     <th>Opsi</th>
             </thead>
                 
             <tbody>
                 <?php $no=1; ?>
-                @foreach($products as $product)
+                @foreach($orders as $order)
                 <tr>
                     <td>{{ $no++ }}</td>
-                    <td>{{ $product->product_name }}</td>
-                    <td>{{ $product->description }}</td>
-                    <td>{{ $product->price }}</td>
-                    <td><img src="{{ asset('storage/products/' . $product->picture) }}" weight="100px" height="100px"></td>
+                    <td>{{ date('d F Y', strtotime($order->created_at)) }}</td>
+                    <td>{{ $order->product->product_name }}</td>
+                    <td>{{ $order->qty }}</td>
+                    <td>{{ $order->user->name }}</td>
                     <td>
-                        <a class="btn btn-sm btn-primary" href="{{ route('admin.edit_product', $product->id) }}">Edit</a>
-                        <form action="{{ route('admin.delete_product', $product->id) }}" method="POST">
+                        @if($order->status == 0)
+                            <p class="badge badge-warning">Sedang diproses</p>
+                        @else
+                            <p class="badge badge-success">Selesai</p>
+                        @endif
+                    </td>
+                    <td>
+                        <a href="{{ route('admin.detail_order', $order->id) }}"class="btn btn-sm btn-primary">Detail</a>
+                        <a href="{{ route('admin.edit_order', $order->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                        <form action="{{ route('admin.delete_order', $order->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger">Delete</button>

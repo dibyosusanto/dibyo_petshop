@@ -32,7 +32,7 @@
                         @if($order->status == 0)
                             <br><p class="badge badge-warning">Sedang diproses</p>
                         @else
-                            Selesai
+                            <br><p class="badge badge-success">Selesai</p>
                         @endif
                     </div>
                 </div>
